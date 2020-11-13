@@ -75,7 +75,7 @@
         <div class="tab-pane fade" id="image">
             <form action="" method="post" enctype="multipart/form-data">
                 <div class="from-group">
-                    <input type="file" class="form-control-file" name="imagen" id="archivo">
+                    <input type="file" class="form-control-file" name="imagen" id="archivo" multiple>
                 </div>
                 <input type="submit" class="mt-2 btn btn-primary" value="Enviar">
             </form>
@@ -90,12 +90,14 @@
             /*if ( !$fp = fopen($_FILES["archivo"]["tmp_name"],"r") ){
                 echo "No se ha podido abrir el archivo";
             }
-
+$2y$10$fUGAKRiRB9bFh6oNX9Isf.y.H.5wk/IVpMMu.xDM7K.5cjEZj/RnS
             $csv = fread($fp,filesize($_FILES["archivo"]["tmp_name"]));*/
             $csv = file_get_contents($_FILES["archivo"]["tmp_name"]);
             imprimirTabla(csvToArray($csv, ","));
         } elseif ( isset($_FILES["imagen"]) ) {
             $data = file_get_contents($_FILES["imagen"]["tmp_name"]);
+            echo $_FILES["imagen"]["tmp_name"];
+            sleep(10);
             $type = $_FILES["imagen"]["type"];
             $imagen=base64_encode($data);
             echo "<img src='data:".$type.";base64,".$imagen."'>";
