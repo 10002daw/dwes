@@ -90,7 +90,6 @@
             /*if ( !$fp = fopen($_FILES["archivo"]["tmp_name"],"r") ){
                 echo "No se ha podido abrir el archivo";
             }
-$2y$10$fUGAKRiRB9bFh6oNX9Isf.y.H.5wk/IVpMMu.xDM7K.5cjEZj/RnS
             $csv = fread($fp,filesize($_FILES["archivo"]["tmp_name"]));*/
             $csv = file_get_contents($_FILES["archivo"]["tmp_name"]);
             imprimirTabla(csvToArray($csv, ","));
