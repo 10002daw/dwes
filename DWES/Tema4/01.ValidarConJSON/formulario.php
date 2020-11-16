@@ -8,7 +8,7 @@
 <body>
     <?php 
         if ( $_POST ) {
-            if ( !$handle = fopen("usuarios.json","r") ) {
+            if ( !$handle = fopen("usuarios","r") ) {
                 echo "No se ha podido abrir el archivo";
             }
             while ( $linea=fgets($handle) ) {
