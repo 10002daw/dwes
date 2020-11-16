@@ -8,16 +8,29 @@
 <body>
     <?php 
         if ( $_POST ) {
-            if ( !$handle = fopen("usuarios","r") ) {
-                echo "No se ha podido abrir el archivo";
-            }
-            while ( $linea=fgets($handle) ) {
-                $json = json_decode($linea,true);
-                if ( $json["usuario"] == $_POST["usuario"] ) {
-                    echo "El usuario ya existe";
+            $json = file_get_contents("usuarios.json");
+            $usuarios = json_decode($json, true);
+            foreach ( $usuarios as $usuario ) {
+                if ( $usuario["usuario"] == $_POST["usuario"] ) {
+                    echo "<h1>El usuario ya existe</h1>";
+                    exit;
+                } else {
+                    $nuevo_usuario = [
+                        "nombre" => $_POST["nombre"],
+                        "apellido2" => $_POST["apellido1"],
+                        "apellido2" => $_POST["apellido2"],
+                        "usuario" => $_POST["usuario"],
+                        "password" => password_hash($_POST["password"], PASSWORD_BCRYPT),
+                        "email" => $_POST["email"],
+                    ];
+
+                    array_push($usuarios, $nuevo_usuario);
+                    $nuevo_json = json_encode($usuarios, JSON_UNESCAPED_UNICODE);
+                    file_put_contents("usuarios.json", $nuevo_json);
+                    echo "<h1>Usuario creado<h1>";
+                    exit;
                 }
             }
-            fclose($handle);
         } else {
     ?>
     <form method="post" action="" enctype="multipart/form-data">
