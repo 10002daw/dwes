@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8">
@@ -8,7 +8,8 @@
 <body>
 	<form action="http://10.10.10.9/DWES/datos.php" method="post">
 	<?php require_once 'select.php';?>
-		<button type="submit">Enviar</button>
+		<input type="submit" name="Enviar" value="baja">
+		<input type="submit" name="Enviar" value="alta">
 	</form>
 		
 <?php
