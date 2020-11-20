@@ -15,9 +15,24 @@
         if ( !$fp = fopen("count","w") ){
             echo "No se ha podido abrir el archivo";
         }
-        fwrite($fp,++$count);
+        
+        if ( isset($_COOKIE["timeStampUltimaVisita"]) ) {
+            $fecha = date("d/m/Y", $_COOKIE["timeStampUltimaVisita"]);
+            $hora = date("H:i:s", $_COOKIE["timeStampUltimaVisita"]);
+
+            echo "Tu última visita fue el $fecha a las $hora";
+            
+            echo "<p>Desde tu última visita, han habido ",$count - $_COOKIE['numVisita']," visitantes";
+        } else {
+            echo "<p>Esta es tu última visita</p>";
+            echo "<p>Eres el visitante número ",$count+1;
+        }
+
+        setcookie("timeStampUltimaVisita", getdate()[0], time()+365*24*60*60);
+        setcookie("numVisita", ++$count, time()+365*24*60*60);
+        
+        fwrite($fp,$count);
         fclose($fp);
-        echo $count;
     ?>
 </body>
 </html>
