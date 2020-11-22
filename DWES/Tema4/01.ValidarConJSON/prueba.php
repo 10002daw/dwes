@@ -2,7 +2,7 @@
     $usuarios = [
         [
             "nombre" => "Pepe",
-            "apellido2" => "García",
+            "apellido1" => "García",
             "apellido2" => "López",
             "usuario" => "pepegl",
             "password" => '$2y$10$3aEEZMEGVbioGC3JUcf21ePDJT3ErnXRbQRrpmsxWKnrlESTIK8g6',
@@ -10,7 +10,7 @@
         ],
         [
             "nombre" => "Paco",
-            "apellido2" => "González",
+            "apellido1" => "González",
             "apellido2" => "Ramírez",
             "usuario" => "pacogr",
             "password" => '$2y$10$dGK5tkWGrNZBWGpCcGDDeua9UXwF1Dw7JIVe4hpzd2uPcAool9/Ey',

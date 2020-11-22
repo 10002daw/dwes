@@ -17,7 +17,7 @@
                 } else {
                     $nuevo_usuario = [
                         "nombre" => $_POST["nombre"],
-                        "apellido2" => $_POST["apellido1"],
+                        "apellido1" => $_POST["apellido1"],
                         "apellido2" => $_POST["apellido2"],
                         "usuario" => $_POST["usuario"],
                         "password" => password_hash($_POST["password"], PASSWORD_BCRYPT),
