@@ -21,12 +21,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Formulario</title>
 </head>
 <body>
     <?php
         if ( !isset($_SESSION['usuario']) ) {
     ?>
+    <p>
+        <a href="formulario.php">Crear nuevo usuario</a>
+    </p>
     <form method="post" action="">
         <table>
             <tr>
@@ -43,16 +46,21 @@
     <?php
         } else {
     ?>
-    <a href="cerrar_sesion.php">Cerrar sesión</a>
-    <br>
-    <a href="">Consultar información de usuario</a>
-    <br>
-    <a href="">Editar información de usuario</a>
-    <br>
+    <p>
+        <a href="cerrar_sesion.php">Cerrar sesión</a>
+    </p>
+    <p>
+        <a href="consultar.php">Consultar información de usuario</a>
+    </p>
+    <p>
+        <a href="formulario.php?modificar">Editar información de usuario</a>
+    </p>
     <?php
             if ( $_SESSION['usuario'] == "admin" ) {
     ?>
-    <a href="">Dar de alta a un usuario</a>
+    <p>
+        <a href="formulario.php?crear">Dar de alta a un usuario</a>
+    </p>
     <?php
             }
         }
