@@ -43,3 +43,6 @@
     </table>
     <input type="submit" value="<?=ucfirst($accion)?>">
 </form>
+<p>
+    <a href="index.php">Volver atrás</a>
+</p>
