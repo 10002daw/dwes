@@ -14,5 +14,23 @@ class Producto {
         $this->descripcion = $descripcion;
     }
 
+    function getId() {
+        return $this->id;
+    }
 
+    function getNombre() {
+        return $this->nombre;
+    }
+
+    function getPrecio() {
+        return $this->precio;
+    }
+
+    function getFoto() {
+        return $this->foto;
+    }
+
+    function getDescripcion() {
+        return $this->descripcion;
+    }
 }
