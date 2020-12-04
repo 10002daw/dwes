@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+hr {
+    margin: 5px 0;
+}
+
+main {
+    width: 100%;
+    margin: auto;
+    max-width: 1000px;
+}
+
+section {
+    width: 60%;
+    float: left;
+    padding: 10px 40px;
+}
+
+article {
+    margin-bottom: 20px;
+}
+
+aside {
+    width: 40%;
+    float: left;
+    padding: 10px 40px;
+}
+
+img {
+    border: 1px solid gray;
+}
+
+aside img {
+    width: 80%;
+}
+
+aside>p {
+    font-weight: bold;
+}
+
+.clearfix::after {
+    clear: both;
+    display: block;
+}
