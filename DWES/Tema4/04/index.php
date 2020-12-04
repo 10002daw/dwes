@@ -56,19 +56,22 @@ if ( $_POST ) {
     <link rel="stylesheet" href="css/style.css">
     <script>
         function mostrarOcultar(id) {
-            var style = document.getElementById(id).style;
-            if ( style.visibility=="hidden" ) {
-                style.visibility = "visible";
-                style.height = "auto";
-            } else {
+            let style = document.getElementById("prod"+id).style;
+            let boton = document.getElementById("boton"+id);
+            if ( style.visibility=="visible" ) {
                 style.visibility = "hidden";
                 style.height = "0";
+                boton.innerHTML = "Detalles"
+            } else {
+                style.visibility = "visible";
+                style.height = "auto";
+                boton.innerHTML = "Ocultar"
             } 
         }
     </script>
 </head>
 <body>
-    <header></header>
+    <header><h1>La Estilográfica</h1></header>
 
     <main>
         <section id="productos">
@@ -78,12 +81,12 @@ if ( $_POST ) {
             foreach ( $productos as $producto ) {
                 echo "<article>\n";
                 echo $producto->productoToHTML();
-                echo "<div id='".$producto->getId()."' class='detalles'>";
+                echo "<div id='prod".$producto->getId()."' class='detalles'>";
                 echo $producto->getDescripcion();
                 echo "</div>";
                 echo "<form method='post' action=''>";
                 echo "<button type='submit' name='comprar' value='".$producto->getId()."'>Comprar</button>";
-                echo "<button type='button' name='detalle' onclick='mostrarOcultar(".$producto->getId().");' value='".$producto->getId()."'>Detalle</button>";
+                echo "<button type='button' name='detalle' id='boton".$producto->getId()."' onclick='mostrarOcultar(".$producto->getId().");'>Detalles</button>";
                 echo "</form>";
                 echo "</article>\n";
             }
@@ -106,7 +109,7 @@ if ( $_POST ) {
                 $carrito->next();
             }
             ?>
-            <p>Total: <?=$carrito->precioTotal()?></p>
+            <p>Total: <?=$carrito->precioTotal()?> €</p>
         </aside>
     </main>
 </body>

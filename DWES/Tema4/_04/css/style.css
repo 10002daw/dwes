@@ -32,13 +32,10 @@ aside {
 
 img {
     border: 1px solid gray;
+    width: 100%;
 }
 
-aside img {
-    width: 80%;
-}
-
-aside>p {
+aside > p {
     font-weight: bold;
 }
 
