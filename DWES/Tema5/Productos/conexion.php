@@ -22,3 +22,5 @@ function consulta($q) {
     $conexion->close();
     return $resultado;
 }
+
+$con = conexion();
