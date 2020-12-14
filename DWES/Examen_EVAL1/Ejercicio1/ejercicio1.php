@@ -16,9 +16,9 @@
     </form>
 
     <?php
-        if ( $_POST && isset($_POST["n1"]) && isset($_POST["n2"]) ) {
-            $n1 = $_POST["n1"];
-            $n2 = $_POST["n2"];
+        if ( $_POST && isset($_POST["n1"]) && isset($_POST["n2"]) && is_numeric($_POST["n1"]) && is_numeric($_POST["n2"]) ) {
+            $n1 = intval($_POST["n1"]);
+            $n2 = intval($_POST["n2"]);
     ?>
     <table border="1">
         <tr>
@@ -35,6 +35,8 @@
         </tr>
     </table>
     <?php      
+        } else {
+            echo "<p>No ha introducido valores numéricos</p>";
         }
     ?>
 </body>

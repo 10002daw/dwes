@@ -1,0 +1,2 @@
+{"usuario": "pepe", "hash": "$2y$10$fdr.p9h.q5XUBBGyuxJtGONPBHRhuSpHjpLecELGBWjv9PtlZObea"}
+{"usuario": "maría", "hash": "$2y$10$TIe7hYbFi.gboYYCyuHZ/.8f13CIpo1pRqVeOK9I5ckXRG1KQEcT."}
