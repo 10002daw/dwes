@@ -6,20 +6,44 @@
     <title>Document</title>
     <style>
         * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             border: 0;
         }
         input {
             border: solid 1 black;
         }
+        
+        tr:nth-child(odd) input, tr:nth-child(odd) td,tr:nth-child(odd) button {
+            background-color: #ddd;
+        }
+        
+        tr .selected { background-color: lightblue;}
     </style>
 </head>
 <body>
-    <form id="form">
-        <input id="a1" style="background-color: white;">
-        <input id="a2">
-        <input id="a3">
-        <input value="da">
-        <textarea></textarea>
-    </form>
+    <table>
+        <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+        </tr>
+        <tr>
+            <td>fd</td>
+            <td>ads</td>
+            <td>fd</td>
+        </tr>
+        <tr>
+            <td class="selected">adf</td>
+            <td><button class="selected">button</button></td>
+            <td class="selected">fds</td>
+        </tr>
+        <tr>
+            <td>ere</td>
+            <td>cda</td>
+            <td>dfae</td>
+        </tr>
+    </table>
 </body>
 </html>
