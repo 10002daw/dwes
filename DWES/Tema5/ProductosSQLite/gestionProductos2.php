@@ -102,17 +102,17 @@
     if ($_POST && isset($_POST['operacion'])) {
         $id=$_POST['id'];$descripcion=$_POST['descripcion']; $nombre=$_POST['nombre']; $precio=$_POST['precio']; $imagen=$_POST['imagen'];
         if ($_POST['operacion']=='guardar') {
-            $sql="UPDATE productos.producto SET descripcion='$descripcion',nombre='$nombre',precio=$precio,imagen='$imagen' WHERE id=$id";
+            $sql="UPDATE producto SET descripcion='$descripcion',nombre='$nombre',precio=$precio,imagen='$imagen' WHERE id=$id";
             $resultado=consulta($sql);
             if ($resultado) {
                 $mensaje="Registro modificado correctamente: $id, $nombre";
-                echo "<script>alert('$mensaje');window.history.back();</script>";
+                echo "<script>alert('$mensaje');location.href=document.referrer;</script>";
             } else {
                 mensajeError("Error actualizando los datos del producto: $id, $nombre");
                 exit();
             }
         } else if ($_POST['operacion']=='borrar') {
-            $sql="DELETE FROM productos.producto WHERE id=$id";
+            $sql="DELETE FROM producto WHERE id=$id";
             $resultado=consulta($sql);
             if ($resultado) {
                 $mensaje="Registro borrado correctamente: $id, $nombre";
@@ -122,11 +122,11 @@
                 exit();
             }
         } else if ($_POST['operacion']=='insertar') {
-            $sql="INSERT INTO productos.producto VALUES($id,'$descripcion','$nombre',$precio,'$imagen')";
+            $sql="INSERT INTO producto VALUES($id,'$descripcion','$nombre',$precio,'$imagen')";
             $resultado=consulta($sql);
             if ($resultado) {
                 $mensaje="Producto dado de alta correctamente: $id, $nombre";
-                echo "<script>alert('$mensaje');window.history.back();</script>";
+                echo "<script>alert('$mensaje');location.href=document.referrer;</script>";
             } else {
                 mensajeError("Error dando de alta producto: $id, $nombre");
                 exit();
@@ -137,16 +137,16 @@
         function mostrarProductos($inf=0, $numProdsPag=3) {
             $inputs=['id'=>['size'=>6,'align'=>'right'],'descripcion'=>['size'=>40,'align'=>'left'],'nombre'=>['size'=>20,'align'=>'left'],
                      'precio'=>['size'=>8,'align'=>'right'],'imagen'=>['size'=>15,'align'=>'left']];
-            $numTotalProds=consulta("select count(*) as numProds from productos.producto")->fetch_assoc()['numProds'];
+            $numTotalProds=consulta("select count(*) as numProds from producto")->fetch()['numProds'];
             $numPaginas=intval(ceil($numTotalProds/$numProdsPag));            
-            $sql="select * from productos.producto limit $inf,$numProdsPag";
+            $sql="select * from producto limit $inf,$numProdsPag";
             $resultado=consulta($sql);
             echo "<table border='1'>\n";
             echo "<thead>\n";
             echo "<tr><th>Id</th><th>Descripción</th><th>Nombre</th><th>Precio</th><th>Imagen</th><th></th><th></th></tr>\n";
             echo "</thead>\n";
             echo "<tbody>\n";
-            while($producto=$resultado->fetch_assoc()) {
+            while($producto=$resultado->fetch(PDO::FETCH_ASSOC)) {
                 echo "<tr>\n";
                 $id=$producto['id'];
                 echo "<form action='' method='post' enctype='multipart/form-data' id='$id'>\n";

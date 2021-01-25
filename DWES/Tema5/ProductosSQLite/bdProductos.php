@@ -22,13 +22,16 @@ function establecerConexion($sgbd="sqlite") {
 
     return $conexion;
 }
-function consulta($sql) {
-    $conexion=establecerConexion();
-    $resultado=$conexion->query($sql);
-    if (!$resultado) {
-        mensajeError("Error ejecutando consulta: $sql.");
-        exit();
+function consulta($sql, $sgbd="sqlite") {
+    $conexion=establecerConexion($sgbd);
+    $tipo = explode(" ",trim(strtoupper($sql)))[0];
+    if ( $tipo == "SELECT") {
+        $resultado = $conexion->query($sql);
+    } else {
+        $resultado = $conexion->exec($sql);
+        echo $conexion->errorInfo()[2]."<br>";
     }
+
     return $resultado;
 }
 ?>
