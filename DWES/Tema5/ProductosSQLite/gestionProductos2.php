@@ -92,7 +92,7 @@
 			//location.hostname
 			xhttp.open("GET", "consultaProductos.php?prod="+prod, true);
 			xhttp.send();
-			alert(tablaHtml);
+			//alert(tablaHtml);
 		}
 	</script>
 </head>

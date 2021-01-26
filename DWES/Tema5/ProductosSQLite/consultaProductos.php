@@ -34,14 +34,14 @@ if ($_GET && isset($_GET['prod'])) {
         echo "{}";
         exit();
     }
-    $sql="SELECT * FROM productos.producto WHERE nombre like '%".$cadena."%'";
+    $sql="SELECT * FROM producto WHERE nombre like '%".$cadena."%'";
     $resultado=consulta($sql);
     $listaProductos=[];
     if ($resultado) {
-        while($producto=$resultado->fetch_assoc()) {
+        while($producto=$resultado->fetch(PDO::FETCH_ASSOC)) {
             array_push($listaProductos,$producto);
         }
-        sleep(10);
+        //sleep(10);
         echo json_encode(['productos'=>$listaProductos],JSON_UNESCAPED_UNICODE);
     } else {
         mensajeError("No results found...");
