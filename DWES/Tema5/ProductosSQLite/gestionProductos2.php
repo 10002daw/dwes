@@ -135,6 +135,7 @@
         
     } else {
         function mostrarProductos($inf=0, $numProdsPag=3) {
+            //$inputs = getCaracteristicas(establecerConexion("mysql"),"producto");
             $inputs=['id'=>['size'=>6,'align'=>'right'],'descripcion'=>['size'=>40,'align'=>'left'],'nombre'=>['size'=>20,'align'=>'left'],
                      'precio'=>['size'=>8,'align'=>'right'],'imagen'=>['size'=>15,'align'=>'left']];
             $numTotalProds=consulta("select count(*) as numProds from producto")->fetch()['numProds'];
