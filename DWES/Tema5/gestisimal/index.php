@@ -1,3 +1,7 @@
+<?php 
+require_once("ProductoModel.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,6 +11,10 @@
 </head>
 <body>
     <h1>GESTISIMAL</h1>
-    
+    <?php
+        $modelo = new ProductoModel();
+        $producto = $modelo->getProducto("h001");
+        echo $producto->toString();
+    ?>
 </body>
 </html>

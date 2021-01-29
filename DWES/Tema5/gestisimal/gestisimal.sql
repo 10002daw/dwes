@@ -5,16 +5,16 @@ GRANT ALL ON gestisimal.* TO 'gestisimal'@'localhost';
 
 use gestisimal;
 
-CREATE TABLE articulo (
-  cod varchar(4),
-  descripcion varchar(200),
-  precio_compra decimal(8,2),
-  precio_venta decimal(8,2),
-  stock integer,
-  PRIMARY KEY(cod)
+CREATE TABLE producto (
+  codigo VARCHAR(4),
+  descripcion VARCHAR(40) NOT NULL,
+  pcompra DECIMAL(7,2) NOT NULL,
+  pventa DECIMAL(7,2) NOT NULL,
+  stock INT NOT NULL,
+  PRIMARY KEY(codigo)
 ) ENGINE=InnoDB;
 
-INSERT INTO articulo VALUES
+INSERT INTO producto VALUES
 ('h001', 'Varilla roscada 0.50m.', 7.00, 10.00, 9),
 ('h005', 'Caja tuercas 16mm.', 21.00, 25.05, 20),
 ('h006', 'chapa galvanizada', 10.50, 20.55, 3),
