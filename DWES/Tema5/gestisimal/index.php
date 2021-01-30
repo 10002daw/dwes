@@ -11,10 +11,26 @@ require_once("ProductoModel.php");
 </head>
 <body>
     <h1>GESTISIMAL</h1>
-    <?php
-        $modelo = new ProductoModel();
-        $producto = $modelo->getProducto("h001");
-        echo $producto->toString();
-    ?>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Precio de compra</th>
+                <th>Precio de venta</th>
+                <th>Margen</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                $modelo = new ProductoModel();
+                $productos = $modelo->getProductos();
+                foreach ( $productos as $producto ) {
+                    echo $producto->toTr();
+                }
+            ?>
+        </tbody>
+    </table>
 </body>
 </html>
