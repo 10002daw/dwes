@@ -51,12 +51,39 @@ class Producto {
         $this->margen = $this->venta - $this->pcompra;
     }
 
+    public function getMargen() {
+        return $this->margen;
+    }
+
     public function getStock() {
         return $this->stock;
     }
 
     public function setStock($stock) {
         $this->stock = $stock;
+    }
+
+    public function aumentarStock($cantidad) {
+        $this->stock += $cantidad;
+    }
+
+    public function disminuirStock($cantidad) {
+        if ( $this->stock >= $cantidad ) {
+            $this->stock -= $cantidad;
+            return true;
+        }
+        return false;
+    }
+
+    public function getArray() {
+        return array(
+            "codigo" => $this->codigo,
+            "descripcion" => $this->descripcion,
+            "pcompra" => $this->pcompra,
+            "pventa" => $this->pventa,
+            "margen" => $this->margen,
+            "stock" => $this->stock
+        );
     }
 
     function toString() {

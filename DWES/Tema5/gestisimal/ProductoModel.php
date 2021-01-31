@@ -3,16 +3,12 @@ require_once("Producto.php");
 
 class ProductoModel {
     private $conexion;
-    /*private $orderBy;
     private $limit;
-    private $offset;*/
 
     function __construct() {
         [$host,$usuario,$passwd,$bd]=['localhost','gestisimal','gestisimal2021','gestisimal'];
         $this->conexion = new PDO("mysql:host=$host;dbname=$bd;charset=utf8",$usuario,$passwd);
-        /*$this->orderBy = "codigo";
-        $this->limit = null;
-        $this->offset = 0;*/
+        $this->limit = func_num_args() == 1 ? func_get_arg(0) : null;
     }
 
     function getProducto($codigo) {
@@ -31,8 +27,12 @@ class ProductoModel {
         return $producto;
     }
 
-    function getProductos($opc="") {
-        $sql = "SELECT * FROM producto"." ".$opc;
+    function getProductos() {
+        $sql = "SELECT * FROM producto";
+        if ( isset($this->limit) && func_num_args() > 0 ) {
+            $inf = (func_get_arg(0)-1) * $this->limit;
+            $sql .= " LIMIT $inf, $this->limit";
+        }
         $statement = $this->conexion->prepare($sql);
         $statement->execute();
         $productos = [];
@@ -46,5 +46,52 @@ class ProductoModel {
             array_push($productos, $producto);
         }
         return $productos;
+    }
+
+    function getNumProductos() {
+        $sql = "SELECT COUNT(*) as num_productos FROM producto";
+        $statement = $this->conexion->prepare($sql);
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC)["num_productos"];
+    }
+
+    function crearProducto($producto) {
+        $sql = "INSERT INTO producto VALUES (:codigo, :descripcion, :pcompra, :pventa, :stock)";
+        $statement = $this->conexion->prepare($sql);
+        $statement->bindValue(':codigo', $producto->getCodigo(), PDO::PARAM_STR);
+        $statement->bindValue(':descripcion', $producto->getDescripcion(), PDO::PARAM_STR);
+        $statement->bindValue(':pcompra', $producto->getPcompra(), PDO::PARAM_STR);
+        $statement->bindValue(':pventa', $producto->getPventa(), PDO::PARAM_STR);
+        $statement->bindValue(':stock', $producto->getStock(), PDO::PARAM_INT);
+        return $statement->execute();
+    }
+
+    function guardarProducto($producto) {
+        $sql = "UPDATE producto SET descripcion = :descripcion, pcompra = :pcompra, pventa = :pventa, stock = :stock WHERE codigo = :codigo";
+        $statement = $this->conexion->prepare($sql);
+        $statement->bindValue(':codigo', $producto->getCodigo(), PDO::PARAM_STR);
+        $statement->bindValue(':descripcion', $producto->getDescripcion(), PDO::PARAM_STR);
+        $statement->bindValue(':pcompra', $producto->getPcompra(), PDO::PARAM_STR);
+        $statement->bindValue(':pventa', $producto->getPventa(), PDO::PARAM_STR);
+        $statement->bindValue(':stock', $producto->getStock(), PDO::PARAM_INT);
+        return $statement->execute();
+    }
+
+    function borrarProducto($codigo) {
+        $sql = "DELETE FROM producto WHERE codigo = :codigo";
+        $statement = $this->conexion->prepare($sql);
+        $statement->bindValue(':codigo', $codigo, PDO::PARAM_STR);
+        return $statement->execute();
+    }
+
+    function existeProducto($codigo) {
+        $sql = "SELECT * FROM producto WHERE codigo = :codigo";
+        $statement = $this->conexion->prepare($sql);
+        $statement->bindParam(':codigo', $codigo, PDO::PARAM_STR);
+        $statement->execute();
+        if ( $statement->fetch(PDO::FETCH_ASSOC) ) {
+            return true;
+        }
+        return false;
     }
 }
