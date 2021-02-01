@@ -205,10 +205,48 @@ if ( isset($_POST["crear"]) ) {
 
             form.submit();
         }
+
+        function venta(codigo, stock) {
+            let cantidad = prompt(`Unidades del producto ${codigo} que quiere vender:`);
+            if ( cantidad == null ) return;
+
+            if ( cantidad > stock ) {
+                alert(`No puedes vender más de ${stock} unidades`);
+                return;
+            }
+
+            let form = document.createElement("form");
+            form.setAttribute("method", "post"); 
+            form.setAttribute("action", "venta.php");
+
+            let input_codigo = document.createElement("input");
+            input_codigo.setAttribute("type", "hidden");
+            input_codigo.setAttribute("name", "codigo"); 
+            input_codigo.setAttribute("value", codigo);
+
+            let input_cantidad = document.createElement("input");
+            input_cantidad.setAttribute("type", "hidden");
+            input_cantidad.setAttribute("name", "cantidad"); 
+            input_cantidad.setAttribute("value", cantidad);
+
+            let input_opcion = document.createElement("input");
+            input_opcion.setAttribute("type", "hidden");
+            input_opcion.setAttribute("name", "venta"); 
+            input_opcion.setAttribute("value", "");
+
+            form.append(input_codigo);
+            form.append(input_cantidad);
+            form.append(input_opcion);
+            
+            document.body.appendChild(form);
+
+            form.submit();
+        }
     </script>
 </head>
 <body>
     <h1>GESTISIMAL</h1>
+    <a href="venta.php">Ver venta</a>
     <table border="1">
         <thead>
             <tr>
@@ -267,7 +305,8 @@ if ( isset($_POST["crear"]) ) {
                     <button type="button" onclick="entradaStock('<?=$codigo?>')">Entrada</button>
                 </td>
                 <td>
-                    <button type="button" onclick="salidaStock('<?=$codigo?>', <?=$stock?>)">Salida</button>
+                    <button type="button" onclick="venta('<?=$codigo?>', <?=$stock?>)">Venta</button>
+                <!--    <button type="button" onclick="salidaStock('<?=$codigo?>', <?=$stock?>)">Salida</button> -->
                 </td>
             </tr>
             <?php
