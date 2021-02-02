@@ -57,6 +57,9 @@ if ( isset($_POST["crear"]) ) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESTISIMAL</title>
     <script>
+        var wsUri = "ws://localhost:9000"; 	
+	    websocket = new WebSocket(wsUri); 
+
         function calcularMargen(producto) {
             pcompra = document.getElementById(`pcompra-${producto}`).value;
             pventa = document.getElementById(`pventa-${producto}`).value;
@@ -137,7 +140,7 @@ if ( isset($_POST["crear"]) ) {
 			} 
 		}
 
-        function entradaStock(codigo) {
+        function entradaStock(codigo, stock) {
             let cantidad = prompt(`Unidades del producto ${codigo} que entran:`);
             if ( cantidad == null ) return;
 
@@ -167,6 +170,16 @@ if ( isset($_POST["crear"]) ) {
             document.body.appendChild(form);
 
             form.submit();
+
+            //prepare json data
+            var msg = {
+                codigo: codigo,
+                stock: stock
+            };
+
+            console.log(msg);
+            //convert and send data to server
+            websocket.send(JSON.stringify(msg));	
         }
 
         function salidaStock(codigo, stock) {
@@ -302,11 +315,11 @@ if ( isset($_POST["crear"]) ) {
                     </form>
                 </td>
                 <td>
-                    <button type="button" onclick="entradaStock('<?=$codigo?>')">Entrada</button>
+                    <button type="button" onclick="entradaStock('<?=$codigo?>', <?=$stock?>)">Entrada</button>
                 </td>
                 <td>
-                    <button type="button" onclick="venta('<?=$codigo?>', <?=$stock?>)">Venta</button>
-                <!--    <button type="button" onclick="salidaStock('<?=$codigo?>', <?=$stock?>)">Salida</button> -->
+                <!--    <button type="button" onclick="venta('<?=$codigo?>', <?=$stock?>)">Venta</button> -->
+                    <button type="button" onclick="salidaStock('<?=$codigo?>', <?=$stock?>)">Salida</button>
                 </td>
             </tr>
             <?php
