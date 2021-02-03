@@ -57,8 +57,20 @@ if ( isset($_POST["crear"]) ) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESTISIMAL</title>
     <script>
-        var wsUri = "ws://localhost:9000"; 	
+        var wsUri = "ws://10.10.10.9:9000"; 	
 	    websocket = new WebSocket(wsUri); 
+        console.log(websocket);
+
+        websocket.onmessage = function(ev) {
+            var response 		= JSON.parse(ev.data); //PHP sends Json data
+            console.log(response);
+            var codigo 		= response.codigo; //message type
+            var stock 	= response.stock; //message text
+
+            document.getElementById(`stock-${codigo}`).value = stock;
+            //document.getElementById(`stock-${codigo}`).style.backgroundColor = "#000080";
+            document.getElementById("pruebas").innerHTML = ev.data;
+        };
 
         function calcularMargen(producto) {
             pcompra = document.getElementById(`pcompra-${producto}`).value;
@@ -169,7 +181,7 @@ if ( isset($_POST["crear"]) ) {
             
             document.body.appendChild(form);
 
-            form.submit();
+            //form.submit();
 
             //prepare json data
             var msg = {
@@ -178,6 +190,7 @@ if ( isset($_POST["crear"]) ) {
             };
 
             console.log(msg);
+            console.log(JSON.stringify(msg));
             //convert and send data to server
             websocket.send(JSON.stringify(msg));	
         }
@@ -258,6 +271,7 @@ if ( isset($_POST["crear"]) ) {
     </script>
 </head>
 <body>
+        <div id="pruebas"></div>
     <h1>GESTISIMAL</h1>
     <a href="venta.php">Ver venta</a>
     <table border="1">
@@ -301,7 +315,7 @@ if ( isset($_POST["crear"]) ) {
                         <input type="number" step="0.01" id="margen-<?=$codigo?>" oninput="calcularMargen('<?=$codigo?>');" size="10" value="<?=$margen?>" readonly required>
                     </td>
                     <td>
-                        <input type="number" name="stock" min="0" size="5" value="<?=$stock?>" readonly required>
+                        <input type="number" name="stock" id="stock-<?=$codigo?>" min="0" size="5" value="<?=$stock?>" readonly required>
                     </td>
                     <td>
                         <input type="hidden" name="editar" value="" readonly>
