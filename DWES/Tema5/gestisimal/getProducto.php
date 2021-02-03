@@ -6,8 +6,8 @@ $modelo = new ProductoModel();
 $arrayProducto=[];
 if ( isset($_GET["p"]) ) {
     if ( $producto = $modelo->getProducto($_GET["p"]) ) {
-        $arrayProducto = $producto->getArray();
+        $arrayProducto[] = $producto->getArray();
     }
 }
 
-echo json_encode(['producto'=>$arrayProducto],JSON_UNESCAPED_UNICODE);
+echo json_encode($arrayProducto, JSON_UNESCAPED_UNICODE);

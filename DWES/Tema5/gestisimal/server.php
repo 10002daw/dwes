@@ -29,7 +29,6 @@ while (true) {
 		$socket_new = socket_accept($socket); //accpet new socket
 		$clients[] = $socket_new; //add socket to client array
         echo "Nuevo cliente\n";
-        print_r($clients);
 		$header = socket_read($socket_new, 1024); //read data sent by the socket
 		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
@@ -50,12 +49,9 @@ while (true) {
 		{
 			$received_text = unmask($buf); //unmask data
             $tst_msg = json_decode($received_text, true); //json decode 
-            print_r($tst_msg);
-			$codigo = $tst_msg['codigo']; //sender name
-			$stock = $tst_msg['stock']; //message text
 			print_r($tst_msg);
 			//prepare data to be sent to client
-			$response_text = mask(json_encode(array('codigo'=>$codigo, 'stock'=>$stock)));
+			$response_text = mask(json_encode($tst_msg));
 			send_message($response_text); //send data
 			break 2; //exist this loop
 		}

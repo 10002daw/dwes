@@ -30,21 +30,43 @@ if ( isset($_POST["crear"]) ) {
     $pventa = $_POST["pventa"];
     $stock = $_POST["stock"];
     $producto = new Producto($codigo, $descripcion, $pcompra, $pventa, $stock);
-    $modelo->guardarProducto($producto);
+    if ( $modelo->guardarProducto($producto) ) {
+        $arrayProducto[]  = $producto->getArray();
+        echo json_encode($arrayProducto, JSON_UNESCAPED_UNICODE);
+        exit;
+    } else {
+        echo json_encode(array(), JSON_UNESCAPED_UNICODE);
+        exit;
+    }
 } elseif ( isset($_POST["entrada"]) ) {
     $codigo = $_POST["codigo"];
     $cantidad = $_POST["cantidad"];
     $producto = $modelo->getProducto($codigo);
     $producto->aumentarStock($cantidad);
-    $modelo->guardarProducto($producto);
+    if ( $modelo->guardarProducto($producto) ) {
+        $arrayProducto[]  = $producto->getArray();
+        echo json_encode($arrayProducto, JSON_UNESCAPED_UNICODE);
+        exit;
+    } else {
+        echo json_encode(array(), JSON_UNESCAPED_UNICODE);
+        exit;
+    }
 } elseif ( isset($_POST["salida"]) ) {
     $codigo = $_POST["codigo"];
     $cantidad = $_POST["cantidad"];
     $producto = $modelo->getProducto($codigo);
     if ( $producto->disminuirStock($cantidad) ) {
-        $modelo->guardarProducto($producto);
+        if ( $modelo->guardarProducto($producto) ) {
+            $arrayProducto[]  = $producto->getArray();
+            echo json_encode($arrayProducto, JSON_UNESCAPED_UNICODE);
+            exit;
+        } else {
+            echo json_encode(array(), JSON_UNESCAPED_UNICODE);
+            exit;
+        }
     } else {
-        echo "<h1>No se pueden sacar $cantidad unidades del producto $codigo</h1>";
+        echo json_encode(array(), JSON_UNESCAPED_UNICODE);
+        exit;
     }    
 }
 
@@ -56,231 +78,20 @@ if ( isset($_POST["crear"]) ) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GESTISIMAL</title>
-    <script>
-        var wsUri = "ws://10.10.10.9:9000"; 	
-	    websocket = new WebSocket(wsUri); 
-        console.log(websocket);
-
-        websocket.onmessage = function(ev) {
-            var response 		= JSON.parse(ev.data); //PHP sends Json data
-            console.log(response);
-            var codigo 		= response.codigo; //message type
-            var stock 	= response.stock; //message text
-
-            document.getElementById(`stock-${codigo}`).value = stock;
-            //document.getElementById(`stock-${codigo}`).style.backgroundColor = "#000080";
-            document.getElementById("pruebas").innerHTML = ev.data;
-        };
-
-        function calcularMargen(producto) {
-            pcompra = document.getElementById(`pcompra-${producto}`).value;
-            pventa = document.getElementById(`pventa-${producto}`).value;
-            document.getElementById(`margen-${producto}`).value = pventa - pcompra;
-        }
-
-        function validar() {
-            var xhttp = new XMLHttpRequest();
-            enviar = false;
-			xhttp.onreadystatechange = function() {
-			    if (this.readyState == 4 && this.status == 200) {
-				    datos=JSON.parse(this.responseText);
-                    //console.log(datos["producto"]);
-				    if ( datos["producto"].length == 0) {
-                        enviar = true;
-                    } else {
-                        document.getElementById("mensajeError").innerHTML = "El producto ya existe";
-                    }
-			    }
-			};
-			xhttp.open("GET", "producto.php?p="+document.getElementById("codigo").value, false);
-			xhttp.send();
-            //console.log(enviar);
-            return enviar;
-        }
-
-        function eliminar(codigo) {
-            return confirm(`¿¿Estás de seguro de que deseas borrar el producto con código ${codigo}??`);
-        }
-
-        function habilitarFila(codigo,habilitar=true,reset=false) {
-			var firstFocus=true;
-			var form=document.getElementById(codigo);
-			if (reset) {
-				form.reset();
-			}
-			for(e of form.elements) {
-				if (e.name!="codigo") {
-					if (habilitar) {
-						e.className="selected";
-						if (firstFocus) {
-							e.focus();
-							firstFocus=false;
-						}
-                        if ( e.name == "editar" ) {
-						    e.innerHTML = 'Guardar';
-                        }
-					} else {
-                        if ( e.name == "editar" ) {
-						    e.innerHTML = 'Editar';
-                        }
-						e.className="";
-					}
-					e.readOnly=!habilitar;
-				}
-			}
-		}
-
-        function habilitar(codigo,boton) {
-			if (boton.innerHTML=='Editar') {
-				if (habilitar.prodAnterior!=undefined) {
-					habilitarFila(habilitar.prodAnterior,false,true);
-				}
-				habilitar.prodAnterior=codigo;
-				habilitarFila(codigo,true);
-			} else if (boton.innerHTML=='Guardar') {
-				guardar(codigo);
-				//habilitarFila(id,false,false);
-				//delete habilitar.prodAnterior;
-			}
-		}
-
-        function guardar(codigo) {
-			let form=document.getElementById(codigo);
-            //console.log(form[6]);
-			if (confirm(`¿¿Estás de seguro de que deseas guardar el producto con código ${codigo}??`)) {
-				form.submit();
-			} 
-		}
-
-        function entradaStock(codigo, stock) {
-            let cantidad = prompt(`Unidades del producto ${codigo} que entran:`);
-            if ( cantidad == null ) return;
-
-            let form = document.createElement("form");
-            form.setAttribute("method", "post"); 
-            form.setAttribute("action", "");
-
-            let input_codigo = document.createElement("input");
-            input_codigo.setAttribute("type", "hidden");
-            input_codigo.setAttribute("name", "codigo"); 
-            input_codigo.setAttribute("value", codigo);
-
-            let input_cantidad = document.createElement("input");
-            input_cantidad.setAttribute("type", "hidden");
-            input_cantidad.setAttribute("name", "cantidad"); 
-            input_cantidad.setAttribute("value", cantidad);
-
-            let input_opcion = document.createElement("input");
-            input_opcion.setAttribute("type", "hidden");
-            input_opcion.setAttribute("name", "entrada"); 
-            input_opcion.setAttribute("value", "");
-
-            form.append(input_codigo);
-            form.append(input_cantidad);
-            form.append(input_opcion);
-            
-            document.body.appendChild(form);
-
-            //form.submit();
-
-            //prepare json data
-            var msg = {
-                codigo: codigo,
-                stock: stock
-            };
-
-            console.log(msg);
-            console.log(JSON.stringify(msg));
-            //convert and send data to server
-            websocket.send(JSON.stringify(msg));	
-        }
-
-        function salidaStock(codigo, stock) {
-            let cantidad = prompt(`Unidades del producto ${codigo} que salen:`);
-            if ( cantidad == null ) return;
-
-            if ( cantidad > stock ) {
-                alert(`No puedes sacar más de ${stock} unidades`);
-                return;
-            }
-
-            let form = document.createElement("form");
-            form.setAttribute("method", "post"); 
-            form.setAttribute("action", "");
-
-            let input_codigo = document.createElement("input");
-            input_codigo.setAttribute("type", "hidden");
-            input_codigo.setAttribute("name", "codigo"); 
-            input_codigo.setAttribute("value", codigo);
-
-            let input_cantidad = document.createElement("input");
-            input_cantidad.setAttribute("type", "hidden");
-            input_cantidad.setAttribute("name", "cantidad"); 
-            input_cantidad.setAttribute("value", cantidad);
-
-            let input_opcion = document.createElement("input");
-            input_opcion.setAttribute("type", "hidden");
-            input_opcion.setAttribute("name", "salida"); 
-            input_opcion.setAttribute("value", "");
-
-            form.append(input_codigo);
-            form.append(input_cantidad);
-            form.append(input_opcion);
-            
-            document.body.appendChild(form);
-
-            form.submit();
-        }
-
-        function venta(codigo, stock) {
-            let cantidad = prompt(`Unidades del producto ${codigo} que quiere vender:`);
-            if ( cantidad == null ) return;
-
-            if ( cantidad > stock ) {
-                alert(`No puedes vender más de ${stock} unidades`);
-                return;
-            }
-
-            let form = document.createElement("form");
-            form.setAttribute("method", "post"); 
-            form.setAttribute("action", "venta.php");
-
-            let input_codigo = document.createElement("input");
-            input_codigo.setAttribute("type", "hidden");
-            input_codigo.setAttribute("name", "codigo"); 
-            input_codigo.setAttribute("value", codigo);
-
-            let input_cantidad = document.createElement("input");
-            input_cantidad.setAttribute("type", "hidden");
-            input_cantidad.setAttribute("name", "cantidad"); 
-            input_cantidad.setAttribute("value", cantidad);
-
-            let input_opcion = document.createElement("input");
-            input_opcion.setAttribute("type", "hidden");
-            input_opcion.setAttribute("name", "venta"); 
-            input_opcion.setAttribute("value", "");
-
-            form.append(input_codigo);
-            form.append(input_cantidad);
-            form.append(input_opcion);
-            
-            document.body.appendChild(form);
-
-            form.submit();
-        }
-    </script>
+    <script src="scripts.js"></script>
+    <link rel="stylesheet" href="estilo.css">
 </head>
 <body>
         <div id="pruebas"></div>
     <h1>GESTISIMAL</h1>
     <a href="venta.php">Ver venta</a>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Código</th>
                 <th>Descripción</th>
-                <th>Precio de compra</th>
-                <th>Precio de venta</th>
+                <th>Prcompra</th>
+                <th>Pventa</th>
                 <th>Margen</th>
                 <th>Stock</th>
                 <th colspan="4"></th>
@@ -300,10 +111,10 @@ if ( isset($_POST["crear"]) ) {
             <tr>
                 <form action="" method="post" id="<?=$codigo?>">
                     <td>
-                        <input type="text" name="codigo" size="5" maxlength="5" value="<?=$codigo?>" readonly required>
+                        <input type="text" name="codigo" id="codigo-<?=$codigo?>" size="4" maxlength="4" value="<?=$codigo?>" readonly required>
                     </td>
                     <td>
-                        <input type="text" name="descripcion" size="30" value="<?=$descripcion?>" readonly required>
+                        <input type="text" name="descripcion" id="descripcion-<?=$codigo?>" size="30" value="<?=$descripcion?>" readonly required>
                     </td>
                     <td>
                         <input type="number" name="pcompra" id="pcompra-<?=$codigo?>" oninput="calcularMargen('<?=$codigo?>');" min="0" step="0.01" size="10" value="<?=$pcompra?>" readonly required>
