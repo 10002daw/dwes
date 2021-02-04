@@ -1,5 +1,5 @@
 <?php
-$host = 'localhost'; //host
+$host = '10.10.10.9'; //host
 $port = '9000'; //port
 $null = NULL; //null var
 

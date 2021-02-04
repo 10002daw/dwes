@@ -96,13 +96,12 @@ function habilitar(codigo,boton) {
 
 function guardar(codigo) {
     let form=document.getElementById(codigo);
+    descripcion = form["descripcion"].value;
+    pcompra = form["pcompra"].value;
+    pventa = form["pventa"].value;
+    stock = form["stock"].value;
     //console.log(form[6]);
     if (confirm(`¿¿Estás seguro de que deseas guardar el producto con código ${codigo}??`)) {
-        descripcion = form["descripcion"].value;
-        pcompra = form["pcompra"].value;
-        pventa = form["pventa"].value;
-        stock = form["stock"].value;
-
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
