@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-15 15:10:44
-  from '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/productoscesta.tpl' */
+/* Smarty version 3.1.38, created on 2021-02-12 14:43:58
+  from '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/productoscesta.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602a80e4d73930_02169932',
+  'unifunc' => 'content_6026861e100180_64557860',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'cce3b2741d1d1690b598a9540416f7cf35a9c22f' => 
+    'd17caccd67d4b31ff7cec133537bed00a75e6f2b' => 
     array (
-      0 => '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/productoscesta.tpl',
-      1 => 1613398242,
+      0 => '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/productoscesta.tpl',
+      1 => 1613136985,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602a80e4d73930_02169932 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6026861e100180_64557860 (Smarty_Internal_Template $_smarty_tpl) {
 ?>    <h3><img src='cesta.png' alt='Cesta' width='24' height='21'> Cesta</h3>
     <hr />
     <?php if (empty($_smarty_tpl->tpl_vars['productoscesta']->value)) {?>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-11 13:34:57
-  from '/home/usuario/PHP/tienda/vista/smarty/templates/login.tpl' */
+/* Smarty version 3.1.38, created on 2021-02-12 14:44:07
+  from '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/login.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_60252471c61e32_06487774',
+  'unifunc' => 'content_602686274871b1_88563635',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'e3fbb7147f377210835acc3d20074c5f05c89279' => 
+    'fc18f54067ee7747c2b2a1850f72e4d2f905b095' => 
     array (
-      0 => '/home/usuario/PHP/tienda/vista/smarty/templates/login.tpl',
-      1 => 1613046873,
+      0 => '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/login.tpl',
+      1 => 1613136985,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_60252471c61e32_06487774 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602686274871b1_88563635 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html>
 <!-- Desarrollo Web en Entorno Servidor -->
 <!-- Tema 5 : Programación orientada a objetos en PHP -->

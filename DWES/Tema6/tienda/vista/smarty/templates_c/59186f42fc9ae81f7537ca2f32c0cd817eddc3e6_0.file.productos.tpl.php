@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-15 13:17:43
-  from '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/productos.tpl' */
+/* Smarty version 3.1.38, created on 2021-02-12 14:43:58
+  from '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/productos.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602a6667069bd9_71411823',
+  'unifunc' => 'content_6026861e0cef94_98204940',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '86df688fd92e213049a96636f62cf799884af3e9' => 
+    '59186f42fc9ae81f7537ca2f32c0cd817eddc3e6' => 
     array (
-      0 => '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/productos.tpl',
-      1 => 1613391460,
+      0 => '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/productos.tpl',
+      1 => 1613136985,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:listaproductos.tpl' => 1,
   ),
 ),false)) {
-function content_602a6667069bd9_71411823 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6026861e0cef94_98204940 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Desarrollo Web en Entorno Servidor -->
 <!-- Tema 5 : Programación orientada a objetos en PHP -->

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-15 15:23:28
-  from '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/cesta.tpl' */
+/* Smarty version 3.1.38, created on 2021-02-16 14:29:17
+  from '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/cesta.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602a83e0df1055_91671023',
+  'unifunc' => 'content_602bc8ad994a41_88772013',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'afd979a1d2420d8cbc313c41046cce2b74b7877c' => 
+    '2f37dc1514db293fa4e7aec17fa50eb71d54f7e3' => 
     array (
-      0 => '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/cesta.tpl',
-      1 => 1613399000,
+      0 => '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/cesta.tpl',
+      1 => 1613136985,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602a83e0df1055_91671023 (Smarty_Internal_Template $_smarty_tpl) {
+function content_602bc8ad994a41_88772013 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!-- Desarrollo Web en Entorno Servidor -->
 <!-- Tema 5 : Programación orientada a objetos en PHP -->

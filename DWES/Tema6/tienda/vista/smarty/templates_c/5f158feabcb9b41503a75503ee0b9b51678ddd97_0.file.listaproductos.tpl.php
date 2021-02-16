@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.38, created on 2021-02-15 16:28:59
-  from '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/listaproductos.tpl' */
+/* Smarty version 3.1.38, created on 2021-02-12 14:43:58
+  from '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/listaproductos.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.38',
-  'unifunc' => 'content_602a933b3df441_16303167',
+  'unifunc' => 'content_6026861e133a14_31660252',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'a6be03f56510084980c47dd511560d1a08875ef0' => 
+    '5f158feabcb9b41503a75503ee0b9b51678ddd97' => 
     array (
-      0 => '/home/user/DWES/DWES/Tema6/tienda/vista/smarty/templates/listaproductos.tpl',
-      1 => 1613402930,
+      0 => '/home/dwes/PHP/DWES/Tema6/tienda/vista/smarty/templates/listaproductos.tpl',
+      1 => 1613136985,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_602a933b3df441_16303167 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6026861e133a14_31660252 (Smarty_Internal_Template $_smarty_tpl) {
 ?>    <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['productos']->value, 'producto');
 $_smarty_tpl->tpl_vars['producto']->do_else = true;
