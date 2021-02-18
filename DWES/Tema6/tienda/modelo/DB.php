@@ -1,6 +1,6 @@
 <?php
 require_once('Producto.php');
-
+require_once('Ordenador.php');
 class DB {
     public static function mensajeError($mensaje) {
         echo "<p><span style='color: red; font-size: 18pt;'>$mensaje</span></p>";
@@ -49,6 +49,21 @@ class DB {
         return $productos;
     }
 
+    public static function obtieneOrdenadores($ini=0,$numProds=20) {
+        $sql = "SELECT * FROM ordenador o";
+        $sql .= " JOIN producto p ON o.cod=p.cod";
+        $resultado = self::ejecutaConsulta ($sql);
+        $ordenadores = array();
+
+    	if($resultado) {
+            // Añadimos un elemento por cada producto obtenido
+            while($row=$resultado->fetch()) {
+                $ordenadores[] = new Producto($row);
+            }
+    	}
+        return $ordenadores;
+    }
+
     public static function obtieneProducto($codigo) {
         $sql = "SELECT * FROM producto";
         $sql .= " WHERE cod='" . $codigo . "'";
@@ -61,6 +76,21 @@ class DB {
     	}
         
         return $producto;    
+    }
+
+    public static function obtieneOrdenador($codigo) {
+        $sql = "SELECT * FROM ordenador o";
+        $sql .= " JOIN producto p ON o.cod=p.cod";
+        $sql .= " WHERE o.cod='" . $codigo . "'";
+        $resultado = self::ejecutaConsulta ($sql);
+        $producto = null;
+
+    	if(isset($resultado)) {
+            $row = $resultado->fetch();
+            $ordenador = new Ordenador($row);
+    	}
+        
+        return $ordenador;    
     }
     
     public static function _verificaCliente($nombre, $contrasena) {

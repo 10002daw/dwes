@@ -1,6 +1,7 @@
 <?php
-class Ordenador {
-	protected $cod;
+require_once("Producto.php");
+
+class Ordenador extends Producto {
 	protected $procesador;
 	protected $ram;
 	protected $disco;
@@ -8,9 +9,6 @@ class Ordenador {
 	protected $unidadoptica;
 	protected $so;
 	protected $otros;
-	protected $nombre_corto;
-	protected $pvp;
-	protected $descripcion;
 
     public function __get($atributo) {
         return $this->$atributo;
@@ -21,7 +19,7 @@ class Ordenador {
     }
 
 	public function __construct($row) {
-		$this->cod = $row['cod'];
+		parent::__construct($row);
 		$this->procesador = $row['procesador'];
 		$this->ram = $row['RAM'];
 		$this->disco = $row['disco'];
@@ -29,8 +27,5 @@ class Ordenador {
 		$this->unidadoptica = $row['unidadoptica'];
 		$this->so = $row['SO'];
 		$this->otros = $row['otros'];
-		$this->nombre_corto = $row['nombre_corto'];
-		$this->pvp = $row['PVP'];
-		$this->descripcion = $row['descripcion'];
 	}
 }

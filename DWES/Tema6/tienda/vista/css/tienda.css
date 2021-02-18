@@ -97,7 +97,7 @@
 }
 .pagproductos #cesta {
   float: right;
-  width: 12em;
+  width: max-content;
   background-color: #588;
 }
 .pagproductos #cesta h3 {
