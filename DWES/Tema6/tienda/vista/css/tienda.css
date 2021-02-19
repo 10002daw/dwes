@@ -165,3 +165,8 @@
   border-bottom-style: solid;
   border-left-style: solid;
 } 
+
+main {
+  padding: 10px 20px;
+  background-color: cornsilk;
+}
