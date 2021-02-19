@@ -10,14 +10,6 @@ class Ordenador extends Producto {
 	protected $so;
 	protected $otros;
 
-    public function __get($atributo) {
-        return $this->$atributo;
-    }
-
-    public function __set($atributo,$valor) {
-        $this->$atributo=$valor;
-    }
-
 	public function __construct($row) {
 		parent::__construct($row);
 		$this->procesador = $row['procesador'];

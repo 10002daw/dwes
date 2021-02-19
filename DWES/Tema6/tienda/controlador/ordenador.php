@@ -1,6 +1,5 @@
 <?php
 require_once('../modelo/DB.php');
-require_once('../modelo/Ordenador.php');
 require_once('../vista/miSmarty.php');
 
 // Recuperamos la información de la sesión

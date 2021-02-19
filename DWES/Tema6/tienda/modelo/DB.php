@@ -58,7 +58,7 @@ class DB {
     	if($resultado) {
             // Añadimos un elemento por cada producto obtenido
             while($row=$resultado->fetch()) {
-                $ordenadores[] = new Producto($row);
+                $ordenadores[] = new Ordenador($row);
             }
     	}
         return $ordenadores;
