@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+body {
+    width: 95vw;
+    max-width: 1200px;
+    margin: 1em auto;
+}
+
+header,
+footer {
+    padding: 2em;
+    background-color: #9cf;
+    border: 2px solid black;
+}
+
+main {
+    border: 1px solid black;
+    padding: 1em;
+    background-color: cornsilk;
+}
+
+main > p {
+    text-align: justify;
+}
+
+.error {
+    font-family: Verdana, Arial, sans-serif; 
+    font-size: 0.7em;
+    color: #900;
+    background-color : #ffff00;
+}
